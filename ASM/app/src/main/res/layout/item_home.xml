@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bluu">
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30sp"
+        android:text="List of Products"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edt_search"
+        android:layout_width="300dp"
+        android:layout_height="40sp"
+        android:layout_below="@id/tv_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20sp"
+        android:background="@drawable/custom_edtit"
+        android:text="Search"
+        android:textColor="#66000000" />
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edt_search"
+        android:orientation="horizontal"
+        android:layout_marginTop="20sp"
+        android:gravity="center_horizontal">
+
+
+        <Button
+            android:id="@+id/btnAll"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginRight="30dp"
+            android:backgroundTint="@color/white"
+            android:drawableTop="@drawable/all"
+            android:text="All"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:cornerRadius="10dp" />
+
+        <Button
+            android:id="@+id/btnRunning"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:backgroundTint="@color/white"
+            android:drawableTop="@drawable/running2"
+            android:text="Running"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:cornerRadius="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll1"
+        android:orientation="horizontal"
+        android:layout_marginTop="20sp"
+        android:gravity="center_horizontal">
+
+
+        <Button
+            android:id="@+id/btnSpirit"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginRight="30dp"
+            android:backgroundTint="@color/white"
+            android:text="Spirit"
+            android:drawableTop="@drawable/spirit"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:cornerRadius="10dp"
+            />
+
+        <Button
+            android:id="@+id/btnSleep"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:drawableTop="@drawable/slipping"
+            android:text="Slipping"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:cornerRadius="10dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll2"
+        android:orientation="horizontal"
+        android:layout_marginTop="20sp"
+        android:gravity="center_horizontal">
+
+
+        <Button
+            android:id="@+id/btnFoods"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginRight="30dp"
+            android:backgroundTint="@color/white"
+            android:text="Foods"
+            android:drawableTop="@drawable/food"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:cornerRadius="10dp"
+            />
+
+        <Button
+            android:id="@+id/btnHealth"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:drawableTop="@drawable/health"
+            android:text="Health"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:cornerRadius="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll3"
+        android:orientation="horizontal"
+        android:layout_marginTop="20sp"
+        android:gravity="center_horizontal">
+
+
+        <Button
+            android:id="@+id/btnCounselor"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginRight="30dp"
+            android:backgroundTint="@color/white"
+            android:text="Counselor"
+            android:drawableTop="@drawable/counselor"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:cornerRadius="10dp"
+            />
+
+        <Button
+            android:id="@+id/btnFriends"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:drawableTop="@drawable/friends"
+            android:text="Friends"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:cornerRadius="10dp" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bluu"
+    tools:context=".mainscreen.fragment.HomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="25dp"
+        android:src="@drawable/alarm" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50sp"
+        android:text="List of Products"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edt_search"
+        android:layout_width="300dp"
+        android:layout_height="40sp"
+        android:layout_below="@id/tv_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20sp"
+        android:background="@drawable/custom_edtit"
+        android:text="Search"
+        android:textColor="#66000000" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edt_search"
+        android:layout_marginTop="20sp" />
+
+    </RelativeLayout>
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginTop="30sp"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <com.google.android.material.appbar.AppBarLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:theme="@style/ThemeOverlay.AppCompat.Light">-->
+
+<!--                <androidx.appcompat.widget.Toolbar-->
+<!--                    android:id="@+id/toolbar"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="?actionBarSize"-->
+<!--                    android:background="#03A9F4"-->
+<!--                    android:theme="@style/ThemeOverlay.AppCompat.Light"-->
+<!--                    app:titleTextColor="@color/white" />-->
+
+<!--            </com.google.android.material.appbar.AppBarLayout>-->
+
+<!--            <FrameLayout-->
+<!--                android:id="@+id/frContent"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent" />-->
+
+<!--        </LinearLayout>-->
+
+<!--    <com.google.android.material.navigation.NavigationView-->
+<!--        android:id="@+id/navigation"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="match_parent" />-->
+
+
+
+
+</RelativeLayout>

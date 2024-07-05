@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ASM"
         tools:targetApi="31">
+<!--        <activity-->
+<!--            android:name=".mainscreen.fragment."-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".login.RegisterActivity"
             android:exported="false" />
