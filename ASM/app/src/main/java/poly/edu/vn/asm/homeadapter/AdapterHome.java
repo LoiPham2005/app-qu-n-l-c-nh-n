@@ -1,11 +1,10 @@
 package poly.edu.vn.asm.homeadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +15,7 @@ import java.util.ArrayList;
 
 import poly.edu.vn.asm.R;
 import poly.edu.vn.asm.homeadapter.model.HomeModel;
+import poly.edu.vn.asm.homeapp.RunningActivity;
 
 public class AdapterHome extends RecyclerView.Adapter<AdapterHome.HomeViewHolder> {
     private Context context;
@@ -24,6 +24,7 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.HomeViewHolder
     public AdapterHome(Context context) {
         this.context = context;
     }
+
     public void setData(ArrayList<HomeModel> list){
         this.listUser = list;
         notifyDataSetChanged();
@@ -43,6 +44,13 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.HomeViewHolder
         }
         holder.ivAvatar.setImageResource(homeModel.getImage());
         holder.tvName.setText(homeModel.getName());
+
+        // Xử lý sự kiện click cho ảnh R.drawable.running
+        if(homeModel.getImage() == R.drawable.all){
+            holder.ivAvatar.setOnClickListener(v -> {
+                context.startActivity(new Intent(context, RunningActivity.class));
+            });
+        }
     }
 
     @Override

@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import poly.edu.vn.asm.mainscreen.EffectMain;
 import poly.edu.vn.asm.mainscreen.fragment.AlarmFragment;
 import poly.edu.vn.asm.mainscreen.fragment.ChatsFragment;
 import poly.edu.vn.asm.mainscreen.fragment.HomeFragment;
