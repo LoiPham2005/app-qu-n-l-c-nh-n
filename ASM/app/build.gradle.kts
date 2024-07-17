@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -40,4 +41,23 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    implementation("com.google.firebase:firebase-analytics")
+// lưu thông tin đăng nhập vào firebase
+    implementation("com.google.firebase:firebase-auth")
+// chỉnh ảnh bo góc
+    implementation ("androidx.cardview:cardview:1.0.0")
+// cho phép chỉnh ảnh bo góc
+    implementation ("com.makeramen:roundedimageview:2.3.0")
+// truy cập firebase storage
+    implementation("com.google.firebase:firebase-storage")
+
+    implementation ("com.google.firebase:firebase-firestore:24.2.0")
+    // hoặc nếu bạn sử dụng Realtime Database
+     implementation ("com.google.firebase:firebase-database:20.0.5")
+
+    implementation ("com.google.firebase:firebase-storage:20.0.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 }
