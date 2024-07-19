@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import poly.edu.vn.asm.R;
 import poly.edu.vn.asm.homeadapter.model.HomeModel;
-import poly.edu.vn.asm.homeapp.RunningActivity;
+import poly.edu.vn.asm.homeapp.note.NoteActivity;
 
 public class AdapterHome extends RecyclerView.Adapter<AdapterHome.HomeViewHolder> {
     private Context context;
@@ -48,7 +48,7 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.HomeViewHolder
         // Xử lý sự kiện click cho ảnh R.drawable.running
         if(homeModel.getImage() == R.drawable.all){
             holder.ivAvatar.setOnClickListener(v -> {
-                context.startActivity(new Intent(context, RunningActivity.class));
+                context.startActivity(new Intent(context, NoteActivity.class));
             });
         }
     }

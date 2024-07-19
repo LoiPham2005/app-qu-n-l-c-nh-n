@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import poly.edu.vn.asm.MainActivity;
 import poly.edu.vn.asm.R;
+import poly.edu.vn.asm.decentralization.Decentralization;
 import poly.edu.vn.asm.login.LoginActivity;
 
 
@@ -27,7 +28,7 @@ public class Intro3Fragment extends Fragment {
         btnGetStarted = view.findViewById(R.id.btn_next);
         btnGetStarted.setOnClickListener(v -> {
             if(getActivity() != null){
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                startActivity(new Intent(getActivity(), Decentralization.class));
             }
         });
 

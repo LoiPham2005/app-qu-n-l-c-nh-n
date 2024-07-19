@@ -78,7 +78,6 @@ public class LoginActivity extends AppCompatActivity {
 //                editor.apply();
 //            }
 
-            dialog.setMessage("Loading");
             dialog.show();
 
             Toast.makeText(this, "Login succesfull", Toast.LENGTH_SHORT).show();

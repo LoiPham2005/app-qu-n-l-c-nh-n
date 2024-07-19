@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<HomeModel> getListUser() {
         ArrayList<HomeModel> list = new ArrayList<>();
 
-        list.add(new HomeModel(R.drawable.all, "All"));
+        list.add(new HomeModel(R.drawable.all, "Note"));
         list.add(new HomeModel(R.drawable.running, "Runing"));
 
         list.add(new HomeModel(R.drawable.spirit, "Spirit"));
