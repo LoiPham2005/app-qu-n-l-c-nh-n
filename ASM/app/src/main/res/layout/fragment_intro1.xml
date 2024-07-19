@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".introduce.fragmet.Intro1Fragment">
 
@@ -64,13 +65,22 @@
         android:text="It’s a pleasure to meet you. We are excited that you’re here so let’s get started!"
         android:textSize="15sp" />
 
+    <TextView
+        android:id="@+id/tvSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_description"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/bluu"
+        android:text="Skip"/>
+
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_below="@id/tv_description"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="180dp"
         android:src="@drawable/next" />
 
 

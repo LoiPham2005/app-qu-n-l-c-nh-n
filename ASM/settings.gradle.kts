@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ASM"
+rootProject.name = "quan_li_ca_nhan"
 include(":app")
  

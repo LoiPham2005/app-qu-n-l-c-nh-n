@@ -94,32 +94,37 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             firebaseAuth = FirebaseAuth.getInstance();
-            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                        getSharedPreferences("data", MODE_PRIVATE).edit()
-                                .putString("username", username)
-                                .putString("email", email)
-                                .putString("password", password)
-                                .apply();
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = firebaseAuth.getCurrentUser();
+                                Toast.makeText(getApplicationContext(), user.getEmail(), Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(getApplicationContext(), user.getEmail(), Toast.LENGTH_SHORT).show();
+                                // Chuyển đến LoginActivity và gửi dữ liệu
+//                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+//                                intent.putExtra("email1", email);
+//                                intent.putExtra("password1", password);
+//                                startActivity(intent);
+//                                finish();
+                                // Lưu thông tin vào SharedPreferences
+                                SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("email", email);
+                                editor.putString("password", password);
+                                editor.apply();
 
-                        // Chuyển đến LoginActivity và gửi dữ liệu
-                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                        intent.putExtra("email1", email);
-                        intent.putExtra("password1", password);
-                        startActivity(intent);
-                        finish();
+                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
 
-                        Toast.makeText(getApplicationContext(), "Registration successful", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+                                Toast.makeText(getApplicationContext(), "Registration successful", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
 
         });
 
