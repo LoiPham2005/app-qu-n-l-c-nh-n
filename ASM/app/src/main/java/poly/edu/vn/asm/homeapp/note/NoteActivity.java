@@ -79,11 +79,11 @@ public class NoteActivity extends AppCompatActivity implements AdapterNote.NoteC
 
         imgDelete.setOnClickListener(v ->
                 new AlertDialog.Builder(this)
-                .setTitle("Confirm Delete")
-                .setMessage("Are you sure you want to delete selected items?")
-                .setPositiveButton("Yes", (dialog, which) -> deleteSelectedItems())
-                .setNegativeButton("No", null)
-                .show()
+                        .setTitle("Confirm Delete")
+                        .setMessage("Are you sure you want to delete selected items?")
+                        .setPositiveButton("Yes", (dialog, which) -> deleteSelectedItems())
+                        .setNegativeButton("No", null)
+                        .show()
         );
 
         edtSearch.addTextChangedListener(new TextWatcher() {
@@ -154,13 +154,13 @@ public class NoteActivity extends AppCompatActivity implements AdapterNote.NoteC
         updateUI();
     }
 
-//    @Override
-//    public void onItemClicked(int position) {
-//        if (isMultiSelectMode) {
-//            toggleItemSelected(position);
-//            updateUI();
-//        }
-//    }
+    @Override
+    public void onItemClicked(int position) {
+        if (isMultiSelectMode) {
+            toggleItemSelected(position);
+            updateUI();
+        }
+    }
 
     private void toggleItemSelected(int position) {
         String itemId = filteredListNote.get(position).getId();
@@ -184,8 +184,20 @@ public class NoteActivity extends AppCompatActivity implements AdapterNote.NoteC
             firestore.collection("notes").document(itemId)
                     .delete()
                     .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(this, "Deleted successfully", Toast.LENGTH_SHORT).show();
-                        fetchNotes(); // Load lại danh sách ghi chú sau khi xóa thành công
+                        // Sau khi xóa thành công, xóa mục khỏi danh sách hiển thị
+                        Note noteToRemove = null;
+                        for (Note note : listNote) {
+                            if (note.getId().equals(itemId)) {
+                                noteToRemove = note;
+                                break;
+                            }
+                        }
+                        if (noteToRemove != null) {
+                            listNote.remove(noteToRemove);
+                        }
+                        if (selectedIds.isEmpty()) {
+                            fetchNotes(); // Load lại danh sách ghi chú sau khi xóa xong
+                        }
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(this, "Failed to delete note", Toast.LENGTH_SHORT).show();
@@ -195,7 +207,6 @@ public class NoteActivity extends AppCompatActivity implements AdapterNote.NoteC
         selectedIds.clear();
         isMultiSelectMode = false;
         updateUI();
-
         progressDialog.dismiss();
     }
 

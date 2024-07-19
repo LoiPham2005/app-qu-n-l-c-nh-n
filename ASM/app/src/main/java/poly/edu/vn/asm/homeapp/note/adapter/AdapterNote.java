@@ -71,11 +71,15 @@ public class AdapterNote extends RecyclerView.Adapter<AdapterNote.NoteViewHolder
         });
 
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, SeeAllActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("note", note);
-            intent.putExtras(bundle);
-            context.startActivity(intent);
+            if (isMultiSelectMode) {
+                noteClickListener.onItemClicked(position);
+            } else {
+                Intent intent = new Intent(context, SeeAllActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("note", note);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
         });
 
         holder.imgMenuVertical.setOnClickListener(v -> {
@@ -87,7 +91,7 @@ public class AdapterNote extends RecyclerView.Adapter<AdapterNote.NoteViewHolder
                 if (id == R.id.menu_Delete) {
                     new AlertDialog.Builder(context)
                             .setTitle("Confirm Delete")
-                            .setMessage("Are you sure you want to delete selected items?")
+                            .setMessage("Are you sure you want to delete this note?")
                             .setPositiveButton("Yes", (dialog, which) ->
                                     firestore.collection("notes").document(note.getId())
                                             .delete()
@@ -134,10 +138,19 @@ public class AdapterNote extends RecyclerView.Adapter<AdapterNote.NoteViewHolder
             tvTime = itemView.findViewById(R.id.tvTimeNote);
             checkBox = itemView.findViewById(R.id.checkBox);
             imgMenuVertical = itemView.findViewById(R.id.imgMenuVertical);
+
+            checkBox.setOnClickListener(v -> {
+                // Notify adapter that an item has been clicked to update the selection
+                if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                    itemView.performClick();
+                }
+            });
         }
     }
 
     public interface NoteClickListener {
         void onItemLongClicked(int position);
+
+        void onItemClicked(int position);
     }
 }
