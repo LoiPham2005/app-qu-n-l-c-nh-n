@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import poly.edu.vn.asm.R;
-import poly.edu.vn.asm.decentralization.Decentralization;
+import poly.edu.vn.asm.login.decentralization.Decentralization;
 
 
 public class Intro1Fragment extends Fragment {

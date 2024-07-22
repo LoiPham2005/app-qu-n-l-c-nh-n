@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".homeapp.eat_and_drink.EatAndDrinkActivity">
+
+    <TextView
+        android:id="@+id/tvhelath"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Health Check"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="100dp"/>
+
+    <EditText
+        android:id="@+id/edtSex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_below="@id/tvhelath"
+        android:inputType="none"
+        android:hint="sex"
+        android:clickable="false"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/edtHeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edtSex"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Height" />
+
+    <EditText
+        android:id="@+id/edtWeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edtHeight"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:hint="Weight" />
+
+    <Button
+        android:id="@+id/btnCalculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edtWeight"
+        android:layout_marginTop="20dp"
+        android:text="Check" />
+</RelativeLayout>

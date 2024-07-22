@@ -1,6 +1,5 @@
 package poly.edu.vn.asm.introduce.fragmet;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,10 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import poly.edu.vn.asm.MainActivity;
 import poly.edu.vn.asm.R;
-import poly.edu.vn.asm.decentralization.Decentralization;
-import poly.edu.vn.asm.login.LoginActivity;
+import poly.edu.vn.asm.login.decentralization.Decentralization;
 
 
 public class Intro3Fragment extends Fragment {

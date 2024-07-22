@@ -19,7 +19,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,6 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText edtName, edtEmail, edtPassword, edtConfirmPassword;
     Button btnSignUp;
     FirebaseAuth firebaseAuth;
+    FirebaseFirestore db;
+    String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,18 @@ public class RegisterActivity extends AppCompatActivity {
         edtPassword = findViewById(R.id.passwordSignUp);
         btnSignUp = findViewById(R.id.btnSignUp);
         edtConfirmPassword = findViewById(R.id.passwordSignUp2);
+
+        // Khởi tạo FirebaseAuth và FirebaseFirestore
+        firebaseAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        // Lấy role từ Intent
+        role = getIntent().getStringExtra("role");
+
+        if (role == null) {
+            Toast.makeText(this, "Chưa chỉ định vai trò", Toast.LENGTH_SHORT).show();
+            return; // Dừng lại nếu role là null
+        }
 
         btnSignUp.setOnClickListener(v -> {
             String username = edtName.getText().toString();
@@ -93,33 +110,45 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
-            firebaseAuth = FirebaseAuth.getInstance();
+            // Đăng ký người dùng bằng Firebase
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                                Toast.makeText(getApplicationContext(), user.getEmail(), Toast.LENGTH_SHORT).show();
+                                if (user != null) {
+                                    String userId = user.getUid();
 
-                                // Chuyển đến LoginActivity và gửi dữ liệu
-//                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-//                                intent.putExtra("email1", email);
-//                                intent.putExtra("password1", password);
-//                                startActivity(intent);
-//                                finish();
-                                // Lưu thông tin vào SharedPreferences
-                                SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("email", email);
-                                editor.putString("password", password);
-                                editor.apply();
+                                    // Lưu vai trò vào Firestore
+                                    Map<String, Object> userMap = new HashMap<>();
+                                    userMap.put("role", role);
+                                    userMap.put("username", username);
+                                    userMap.put("email", email);
+                                    userMap.put("password", password);
 
-                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                                finish();
+                                    db.collection("account").document(userId)
+                                            .set(userMap)
+                                            .addOnCompleteListener(task1 -> {
+                                                if (task1.isSuccessful()) {
+                                                    // Lưu thông tin vào SharedPreferences
+                                                    SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+                                                    SharedPreferences.Editor editor = preferences.edit();
+                                                    editor.putString("email", email);
+                                                    editor.putString("password", password);
+                                                    editor.apply();
 
-                                Toast.makeText(getApplicationContext(), "Registration successful", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                                                    // Chuyển sang màn hình đăng nhập
+                                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                                    intent.putExtra("role", role);
+                                                    startActivity(intent);
+                                                    finish();
+                                                } else {
+                                                    Toast.makeText(RegisterActivity.this, "Lỗi Firestore: " + task1.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
                             } else {
                                 Toast.makeText(getApplicationContext(), "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }

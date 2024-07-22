@@ -51,6 +51,8 @@ dependencies {
 // cho phép chỉnh ảnh bo góc
     implementation ("com.makeramen:roundedimageview:2.3.0")
 // truy cập firebase storage
+    implementation("com.google.firebase:firebase-firestore")
+
     implementation("com.google.firebase:firebase-storage")
 
     implementation ("com.google.firebase:firebase-firestore:24.2.0")
@@ -58,8 +60,9 @@ dependencies {
      implementation ("com.google.firebase:firebase-database:20.0.5")
 
     implementation ("com.google.firebase:firebase-storage:20.0.0")
+
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 
-    implementation("com.google.firebase:firebase-firestore")
+
 }

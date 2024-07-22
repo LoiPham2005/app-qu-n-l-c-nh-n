@@ -15,7 +15,9 @@ import java.util.ArrayList;
 
 import poly.edu.vn.asm.R;
 import poly.edu.vn.asm.homeadapter.model.HomeModel;
+import poly.edu.vn.asm.homeapp.eat_and_drink.EatAndDrinkActivity;
 import poly.edu.vn.asm.homeapp.note.NoteActivity;
+import poly.edu.vn.asm.homeapp.running.RunningActivity;
 
 public class AdapterHome extends RecyclerView.Adapter<AdapterHome.HomeViewHolder> {
     private Context context;
@@ -49,6 +51,14 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.HomeViewHolder
         if(homeModel.getImage() == R.drawable.all){
             holder.ivAvatar.setOnClickListener(v -> {
                 context.startActivity(new Intent(context, NoteActivity.class));
+            });
+        } else if (homeModel.getImage() == R.drawable.food) {
+            holder.ivAvatar.setOnClickListener(v -> {
+                context.startActivity(new Intent(context, EatAndDrinkActivity.class));
+            });
+        }else if (homeModel.getImage() == R.drawable.running) {
+            holder.ivAvatar.setOnClickListener(v -> {
+                context.startActivity(new Intent(context, RunningActivity.class));
             });
         }
     }

@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE " />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +16,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ASM"
         tools:targetApi="31">
+        <activity
+            android:name=".homeapp.running.show.ShowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".homeapp.running.run.RunActivity"
+            android:exported="false" />
+        <activity
+            android:name=".homeapp.eat_and_drink.EatAndDrinkActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExpertActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminActivity"
+            android:exported="false" />
         <activity
             android:name=".homeapp.note.screen.SeeAllActivity"
             android:exported="false" />
@@ -28,10 +44,10 @@
             android:name=".homeapp.note.NoteActivity"
             android:exported="false" />
         <activity
-            android:name=".decentralization.Decentralization"
+            android:name=".login.decentralization.Decentralization"
             android:exported="false" />
         <activity
-            android:name=".homeapp.RunningActivity"
+            android:name=".homeapp.running.RunningActivity"
             android:exported="false" />
         <activity
             android:name=".login.RegisterActivity"

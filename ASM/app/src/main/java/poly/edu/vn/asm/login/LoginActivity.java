@@ -19,7 +19,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import poly.edu.vn.asm.AdminActivity;
+import poly.edu.vn.asm.ExpertActivity;
 import poly.edu.vn.asm.MainActivity;
 import poly.edu.vn.asm.R;
 
@@ -30,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
     CheckBox checkBox;
     ProgressDialog dialog;
     private FirebaseAuth firebaseAuth;
+    FirebaseFirestore db;
+    String role;
 
 //    @Override
 //    public void onStart() {
@@ -65,11 +71,17 @@ public class LoginActivity extends AppCompatActivity {
         checkBox = findViewById(R.id.checkBox);
         dialog = new ProgressDialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        // Lấy role từ Intent
+        role = getIntent().getStringExtra("role");
 
         tvRegister.setOnClickListener(v -> {
             Intent intent = new Intent(this, RegisterActivity.class);
+            intent.putExtra("role", role);
             startActivity(intent);
         });
+
 
         // Lấy thông tin từ SharedPreferences
         SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
@@ -114,19 +126,68 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 // Đăng nhập bằng email và password nếu đúng thông tin sẽ vào màn trong
+//                firebaseAuth.signInWithEmailAndPassword(email, password)
+//                        .addOnCompleteListener(LoginActivity.this, task -> {
+//                            if (task.isSuccessful()) {
+//                                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+//
+//                                // Lưu thông tin vào SharedPreferences nếu cần
+//
+//                                // Chuyển sang màn hình chính
+//                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                                finish();
+//                            } else {
+//                                Toast.makeText(LoginActivity.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+
+
+
+                // Kiểm tra đăng nhập bằng email và password xem có tồn tại không
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginActivity.this, task -> {
+                            // Nếu đúng tài khoản
                             if (task.isSuccessful()) {
                                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-
-                                // Lưu thông tin vào SharedPreferences nếu cần
-
-                                // Chuyển sang màn hình chính
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                finish();
+                                if (user != null) {
+                                    // Lấy thông tin người dùng từ Firestore
+                                    db.collection("account").document(user.getUid())
+                                            .get()
+                                            .addOnCompleteListener(task1 -> {
+                                                if (task1.isSuccessful()) {
+                                                    DocumentSnapshot document = task1.getResult();
+                                                    if (document.exists()) {
+                                                        String userRole = document.getString("role");
+                                                        // Kiểm tra role của người dùng
+                                                        if (role.equals(userRole)) {
+                                                            // Nếu role là admin, chuyển đến MainActivity2
+                                                            if ("admin".equals(role)) {
+                                                                startActivity(new Intent(LoginActivity.this, AdminActivity.class));
+                                                            } else if ("expert".equals(role)) {
+                                                                startActivity(new Intent(LoginActivity.this, ExpertActivity.class));
+                                                            } else {
+                                                                // Nếu role là user, chuyển đến MainActivity3
+                                                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                                            }
+                                                            finish();
+                                                        } else {
+                                                            // Nếu role không khớp, thông báo lỗi
+                                                            Toast.makeText(LoginActivity.this, "Sai vai trò", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    } else {
+                                                        // Nếu không tìm thấy vai trò của người dùng, thông báo lỗi
+                                                        Toast.makeText(LoginActivity.this, "Không tìm thấy vai trò người dùng", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                } else {
+                                                    // Nếu có lỗi khi truy vấn Firestore, thông báo lỗi
+                                                    Toast.makeText(LoginActivity.this, "Lỗi Firestore: " + task1.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
                             } else {
-                                Toast.makeText(LoginActivity.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                // Nếu đăng nhập thất bại, thông báo lỗi
+                                Toast.makeText(LoginActivity.this, "Đăng nhập thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
             });
