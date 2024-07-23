@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import poly.edu.vn.asm.R;
 import poly.edu.vn.asm.homeapp.running.run.RunActivity;
-import poly.edu.vn.asm.homeapp.running.show.ShowActivity;
+import poly.edu.vn.asm.homeapp.running.show.ShowRunActivity;
 
 public class RunningActivity extends AppCompatActivity {
     Button btnShow, btnRun;
@@ -36,7 +36,7 @@ public class RunningActivity extends AppCompatActivity {
         });
 
         btnShow.setOnClickListener(v -> {
-            startActivity(new Intent(this, ShowActivity.class));
+            startActivity(new Intent(this, ShowRunActivity.class));
         });
     }
 }

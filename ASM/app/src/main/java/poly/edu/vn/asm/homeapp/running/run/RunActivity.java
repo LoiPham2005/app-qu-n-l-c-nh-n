@@ -23,11 +23,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import poly.edu.vn.asm.R;
+import poly.edu.vn.asm.homeapp.running.show.adapter.Run;
 
 public class RunActivity extends AppCompatActivity implements SensorEventListener {
     private static final int ACTIVITY_RECOGNITION_REQUEST_CODE = 1;
@@ -98,14 +97,9 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     }
 
     private void saveRunData() {
-//        String timestamp = String.valueOf(System.currentTimeMillis());
-//        Map<String, Object> runData = new HashMap<>();
-//        runData.put("steps", stepCount);
-//        runData.put("timestamp", timestamp);
         String id = UUID.randomUUID().toString();
-        Running runData = new Running();
-        runData.setId(id);
-        runData.setStepCount(stepCount);
+        long timestamp = System.currentTimeMillis();  // lấy thời gian hiện tại
+        Run runData = new Run(id, stepCount, timestamp);
 
         db.collection("runs")
                 .add(runData)
@@ -118,7 +112,6 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
                     Toast.makeText(RunActivity.this, "Error saving run data", Toast.LENGTH_SHORT).show();
                 });
     }
-
 
     @Override
     public void onSensorChanged(SensorEvent event) {
