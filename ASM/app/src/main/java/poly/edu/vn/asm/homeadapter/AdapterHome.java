@@ -18,6 +18,7 @@ import poly.edu.vn.asm.homeadapter.model.HomeModel;
 import poly.edu.vn.asm.homeapp.eat_and_drink.EatAndDrinkActivity;
 import poly.edu.vn.asm.homeapp.note.NoteActivity;
 import poly.edu.vn.asm.homeapp.running.RunningActivity;
+import poly.edu.vn.asm.homeapp.spirit.SpiritActivity;
 
 public class AdapterHome extends RecyclerView.Adapter<AdapterHome.HomeViewHolder> {
     private Context context;
@@ -59,6 +60,10 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.HomeViewHolder
         }else if (homeModel.getImage() == R.drawable.running) {
             holder.ivAvatar.setOnClickListener(v -> {
                 context.startActivity(new Intent(context, RunningActivity.class));
+            });
+        }else if (homeModel.getImage() == R.drawable.spirit) {
+            holder.ivAvatar.setOnClickListener(v -> {
+                context.startActivity(new Intent(context, SpiritActivity.class));
             });
         }
     }

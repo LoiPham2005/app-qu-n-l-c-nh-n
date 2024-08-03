@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import poly.edu.vn.asm.R;
+import poly.edu.vn.asm.login.decentralization.Decentralization;
 import poly.edu.vn.asm.settingscreen.Setting;
 import poly.edu.vn.asm.settingscreen.adapter.AdapterSettings;
 
@@ -39,7 +41,10 @@ public class SettingsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         imgAvatar = view.findViewById(R.id.imgAvatar);
         imgEdit = view.findViewById(R.id.imgEdit);
-
+        Button btnLogout = view.findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), Decentralization.class));
+        });
         // Khởi tạo SharedPreferences
         sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
 

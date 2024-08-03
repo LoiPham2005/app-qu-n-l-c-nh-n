@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import poly.edu.vn.asm.MainActivity;
 import poly.edu.vn.asm.R;
 import poly.edu.vn.asm.homeapp.note.adapter.AdapterNote;
 import poly.edu.vn.asm.homeapp.note.adapter.Note;
@@ -28,7 +30,7 @@ import poly.edu.vn.asm.homeapp.note.create.CreateNoteActivity;
 
 public class NoteActivity extends AppCompatActivity implements AdapterNote.NoteClickListener {
     FirebaseFirestore firestore;
-    ImageView imgCreate, imgDelete, imgExit;
+    ImageView imgCreate, imgDelete, imgExit, imgBackNote;
     EditText edtSearch;
     RecyclerView recyclerView;
     AdapterNote adapterNote;
@@ -48,6 +50,7 @@ public class NoteActivity extends AppCompatActivity implements AdapterNote.NoteC
         recyclerView = findViewById(R.id.recyclerView);
         imgExit = findViewById(R.id.imgXExit);
         edtSearch = findViewById(R.id.edtSearch);
+        imgBackNote = findViewById(R.id.imgBackNote);
 
         progressDialog = new ProgressDialog(this);
 
@@ -60,6 +63,11 @@ public class NoteActivity extends AppCompatActivity implements AdapterNote.NoteC
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterNote);
+
+        imgBackNote.setOnClickListener(v -> {
+            // Chuyển sang màn hình chính
+            startActivity(new Intent(this, MainActivity.class));
+        });
 
         imgCreate.setOnClickListener(v -> {
             // Chuyển sang màn hình tạo ghi chú mới
@@ -101,6 +109,9 @@ public class NoteActivity extends AppCompatActivity implements AdapterNote.NoteC
 
         fetchNotes();
     }
+
+
+
 
     private void fetchNotes() {
         progressDialog.show();

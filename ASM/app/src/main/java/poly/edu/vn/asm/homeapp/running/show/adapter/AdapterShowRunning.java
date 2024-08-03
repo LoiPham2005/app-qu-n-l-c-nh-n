@@ -39,7 +39,7 @@ public class AdapterShowRunning extends RecyclerView.Adapter<AdapterShowRunning.
     @Override
     public void onBindViewHolder(@NonNull showRunning holder, int position) {
         Run run = runArrayList.get(position);
-        holder.tvStep.setText(String.valueOf(run.getStep()));
+        holder.tvStep.setText(String.valueOf(run.getStep())+ " steps");
 
         // Format and display timestamp
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());

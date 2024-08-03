@@ -9,21 +9,35 @@
     android:orientation="vertical"
     tools:context=".homeapp.note.NoteActivity">
 
-    <EditText
-        android:id="@+id/edtSearch"
+    <LinearLayout
+        android:id="@+id/ll1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="    search"
-        android:textSize="25dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/custom_edtit"/>
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgBackNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/edtSearch"
+            android:src="@drawable/back"/>
+
+        <EditText
+            android:id="@+id/edtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="    search"
+            android:textSize="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/custom_edtit"/>
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/imgXExit"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@id/edtSearch"
+        android:layout_below="@id/ll1"
         android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="20dp"
@@ -33,7 +47,7 @@
         android:id="@+id/imgDelete"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@id/edtSearch"
+        android:layout_below="@id/ll1"
         android:layout_toLeftOf="@id/imgCreate"
         android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
@@ -44,7 +58,7 @@
         android:id="@+id/imgCreate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edtSearch"
+        android:layout_below="@id/ll1"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
